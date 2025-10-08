@@ -1,5 +1,8 @@
 FROM node:22-bookworm
 
+# Change node user to UID 1001 to match `runner` user
+RUN usermod -u 1001 node && groupmod -g 1001 node
+
 USER node
 WORKDIR /app
 

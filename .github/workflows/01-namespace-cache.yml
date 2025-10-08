@@ -1,9 +1,8 @@
-name: 01. Playwright on Namespace Runners
+name: 01. Playwright on Namespace Runners w/ Cache
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+  workflow_call:
+
 jobs:
   test:
     timeout-minutes: 60

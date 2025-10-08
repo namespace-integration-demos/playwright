@@ -1,9 +1,8 @@
 name: 00. Playwright on GitHub Runners
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+  workflow_call:
+
 jobs:
   test:
     timeout-minutes: 60

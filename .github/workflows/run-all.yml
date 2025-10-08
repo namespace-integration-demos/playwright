@@ -6,8 +6,7 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-#    - cron: '0 0 * * *' # Once a day
-    - cron: '*/5 * * * *' # Every three minutes
+    - cron: '0 0 * * *' # Once a day
 
 jobs:
   github-runners:

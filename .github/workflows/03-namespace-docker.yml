@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: namespacelabs/nscloud-checkout-action@v7
 
+        # Recommended to use Locally Cached builders for this, to keep build context local
+        # See https://namespace.so/docs/solutions/github-actions/docker-builds#when-to-choose-local-caching
       - name: Build playwright image
         uses: docker/build-push-action@v5
         with:
@@ -23,7 +25,14 @@ jobs:
         run: |
           mkdir ./playwright-report ./test-results
           docker image ls
-          docker run -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest npx playwright test
+          docker run --detach -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest tail -f /dev/null
+
+      - name: Breakpoint if tests failed
+        if: failure()
+        uses: namespacelabs/breakpoint-action@v0
+        with:
+          duration: 15m
+          authorized-users: annervisser
 
       - uses: namespace-actions/upload-artifact@v1
         if: ${{ !cancelled() }}

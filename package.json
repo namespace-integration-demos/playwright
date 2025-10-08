@@ -1,0 +1,8 @@
+{
+  "name": "namespace-integration-playwright",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.0"
+  }
+}

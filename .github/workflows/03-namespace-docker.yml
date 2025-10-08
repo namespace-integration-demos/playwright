@@ -1,0 +1,30 @@
+name: Playwright on GitHub Runners, with APT caching
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: namespace-profile-ns-integration-playwright
+    steps:
+      - uses: namespacelabs/nscloud-checkout-action@v7
+
+      - name: Build playwright image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: playwright.Dockerfile
+          load: true
+          tags: 'pw-image'
+
+      - name: Run Playwright tests
+        run: docker run -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image npx playwright test
+
+      - uses: namespace-actions/upload-artifact@v1
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

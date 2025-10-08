@@ -29,13 +29,6 @@ jobs:
             -v "$PWD/test-results:/app/test-results" pw-image:latest \
             npx playwright test --workers 100%
 
-      - name: Breakpoint if tests failed
-        if: failure()
-        uses: namespacelabs/breakpoint-action@v0
-        with:
-          duration: 15m
-          authorized-users: annervisser
-
       - uses: namespace-actions/upload-artifact@v1
         if: ${{ !cancelled() }}
         with:

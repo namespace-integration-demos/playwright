@@ -30,7 +30,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --workers 100%
 
       - uses: namespace-actions/upload-artifact@v1
         if: ${{ !cancelled() }}

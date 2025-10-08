@@ -1,4 +1,4 @@
-name: run-all.yml
+name: Run Playwright Integrations Workflows
 on:
   workflow_dispatch:
   push:
@@ -10,10 +10,11 @@ on:
 
 jobs:
   github-runners:
+    name: "00. PW on GitHub runners"
     uses: ./.github/workflows/00-github-runners.yml
   namespace-cache:
+    name: "01. PW on Namespace runners w/ caching"
     uses: ./.github/workflows/01-namespace-cache.yml
-  namespace-apt-cache:
-    uses: ./.github/workflows/02-namespace-apt-cache.yml
   namespace-docker:
-    uses: ./.github/workflows/03-namespace-docker.yml
+    name: "02. PW on Namespace runners using Docker"
+    uses: ./.github/workflows/02-namespace-docker.yml

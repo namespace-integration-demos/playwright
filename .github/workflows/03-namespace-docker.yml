@@ -1,4 +1,4 @@
-name: Playwright on Namespace Runners using Docker
+name: 03. Playwright on Namespace Runners using Docker
 on:
   push:
     branches: [ main, master ]
@@ -17,12 +17,12 @@ jobs:
           context: .
           file: playwright-optimized.Dockerfile
           load: true
-          tags: 'pw-image'
+          tags: pw-image:latest
 
       - name: Run Playwright tests
         run: |
           mkdir ./playwright-report ./test-results
-          docker run -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image npx playwright test
+          docker run -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest npx playwright test
 
       - uses: namespace-actions/upload-artifact@v1
         if: ${{ !cancelled() }}

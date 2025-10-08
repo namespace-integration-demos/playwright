@@ -1,4 +1,4 @@
-name: Playwright on Namespace Runners
+name: 01. Playwright on Namespace Runners
 on:
   push:
     branches: [ main, master ]

@@ -1,4 +1,4 @@
-name: Playwright on GitHub Runners
+name: 00. Playwright on GitHub Runners
 on:
   push:
     branches: [ main, master ]

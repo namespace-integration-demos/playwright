@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/home/node/.npm,uid=1001,gid=1001 \
 RUN --mount=type=cache,target=/tmp/playwright-cache,uid=1001,gid=1001 \
     PLAYWRIGHT_BROWSERS_PATH=/tmp/playwright-cache npx playwright install \
     && mkdir -p ~/.cache/ms-playwright \
-    && cp -r /tmp/playwright-cache ~/.cache/ms-playwright
+    && cp -r /tmp/playwright-cache/** ~/.cache/ms-playwright
 
 # Switch to root to run apt install
 USER root

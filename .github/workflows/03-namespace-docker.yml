@@ -25,10 +25,10 @@ jobs:
         run: |
           mkdir ./playwright-report ./test-results
           docker image ls
-          docker run --detach -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest tail -f /dev/null
+          docker run -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest npx playwright test
 
       - name: Breakpoint if tests failed
-        if: always()
+        if: failure()
         uses: namespacelabs/breakpoint-action@v0
         with:
           duration: 15m

@@ -22,6 +22,7 @@ jobs:
       - name: Run Playwright tests
         run: |
           mkdir ./playwright-report ./test-results
+          docker image ls
           docker run -e CI=1 -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image:latest npx playwright test
 
       - uses: namespace-actions/upload-artifact@v1

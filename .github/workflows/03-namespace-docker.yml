@@ -1,4 +1,4 @@
-name: Playwright on GitHub Runners, with APT caching
+name: Playwright on Namespace Runners using Docker
 on:
   push:
     branches: [ main, master ]
@@ -20,7 +20,9 @@ jobs:
           tags: 'pw-image'
 
       - name: Run Playwright tests
-        run: docker run -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image npx playwright test
+        run: |
+          mkdir ./playwright-report ./test-results
+          docker run -v "$PWD/playwright-report:/app/playwright-report" -v "$PWD/test-results:/app/test-results" pw-image npx playwright test
 
       - uses: namespace-actions/upload-artifact@v1
         if: ${{ !cancelled() }}

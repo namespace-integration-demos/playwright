@@ -18,14 +18,11 @@ jobs:
       - name: Set up Cache
         uses: namespacelabs/nscloud-cache-action@v1
         with:
+          cache: |
+            playwright
+            apt
           path: |
             ~/.npm
-            ~/.cache/ms-playwright
-            /var/cache/apt
-
-        # By default, apt cleans its caches after every `apt install`
-      - name: Stop apt cleaning cache
-        run: sudo rm /etc/apt/apt.conf.d/docker-clean
 
       - name: Install dependencies
         run: npm ci

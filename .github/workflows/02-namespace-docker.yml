@@ -13,7 +13,7 @@ jobs:
         # Recommended to use Locally Cached builders for this, to keep build context local
         # See https://namespace.so/docs/solutions/github-actions/docker-builds#when-to-choose-local-caching
       - name: Build playwright image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: playwright-optimized.Dockerfile
